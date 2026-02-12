@@ -2,59 +2,66 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Valentine</title>
+<title>My Valentine ❤️</title>
 
 <style>
 body{
 margin:0;
 height:100vh;
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:linear-gradient(135deg,#ff758c,#ff7eb3);
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 }
 
 .wrapper{
 text-align:center;
 color:white;
-max-width:400px;
+max-width:420px;
 width:100%;
+padding:20px;
 }
 
-h1{margin-bottom:40px;}
+h1{
+margin-bottom:40px;
+}
 
 #box{
 position:relative;
-height:200px;
-margin-top:30px;
+height:160px;
+margin-top:20px;
 }
 
-#yesWrap{
-text-align:center;
-}
-
-button{
-padding:15px 35px;
+/* YES button */
+#yesBtn{
+background:#ff2d55;
+color:white;
+padding:16px 40px;
 font-size:20px;
 border:none;
 border-radius:30px;
 cursor:pointer;
+box-shadow:0 4px 12px rgba(0,0,0,.3);
 }
 
-#yesBtn{
-background:#ff2d55;
-color:white;
-}
-
+/* NO button */
 #noBtn{
-position:absolute;
-top:80px;   /* always BELOW Yes */
-left:0;
 background:#555;
 color:white;
+padding:14px 35px;
+font-size:18px;
+border:none;
 border-radius:30px;
-padding:15px 35px;
+cursor:pointer;
+position:absolute;
+top:80px; /* always BELOW yes */
+left:0;
+}
+
+/* small hover */
+#yesBtn:hover{
+transform:scale(1.05);
 }
 </style>
 </head>
@@ -65,12 +72,14 @@ padding:15px 35px;
 
 <h1 id="question">Will you be my Valentine? ❤️</h1>
 
-<<div id="box">
-  <div id="yesWrap">
-    <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
-  </div>
+<div id="box">
 
-  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
+<div style="text-align:center;">
+<button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+</div>
+
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
 </div>
 
 </div>
@@ -92,34 +101,33 @@ const questions=[
 
 function moveNo(){
 
-const btn = document.getElementById("noBtn");
-const box = document.getElementById("box");
+const btn=document.getElementById("noBtn");
+const box=document.getElementById("box");
 
-const boxWidth = box.clientWidth;
-const btnWidth = btn.offsetWidth;
+const boxWidth=box.clientWidth;
+const btnWidth=btn.offsetWidth;
 
-// NO moves horizontally only, below YES
-const x = Math.random() * (boxWidth - btnWidth);
+// NO moves ONLY left-right
+const x=Math.random()*(boxWidth-btnWidth);
 
-btn.style.left = x + "px";
-btn.style.top = "80px";
+btn.style.left=x+"px";
+btn.style.top="80px";
 
-if(round < questions.length - 1){
-  round++;
-  document.getElementById("question").innerText = questions[round];
+if(round<questions.length-1){
+round++;
+document.getElementById("question").innerText=questions[round];
 }
 }
-
-}
-
 
 function yesClicked(){
+
 document.body.innerHTML=
-"<div style='color:white;text-align:center'>" +
-"<h1>Yesss ❤️</h1>" +
-"<h2>You made me the happiest husband alive</h2>" +
+"<div style='text-align:center;color:white'>" +
+"<h1>Yesss 😍</h1>" +
+"<h2>You just made me the luckiest husband alive ❤️</h2>" +
 "<p>I choose you. Always.</p>" +
 "</div>";
+
 }
 
 </script>
