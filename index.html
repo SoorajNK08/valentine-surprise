@@ -39,6 +39,10 @@ position:relative;
 height:220px;
 margin-top:25px;
 }
+  
+#noBtn{
+transition:0.15s ease;
+}
 
 #noBtn{
 position:absolute;
@@ -95,6 +99,7 @@ function moveNo(){
 
 const no=document.getElementById("noBtn");
 const area=document.getElementById("area");
+const yes=document.getElementById("yesBtn");
 
 const aw=area.clientWidth;
 const ah=area.clientHeight;
@@ -102,14 +107,26 @@ const ah=area.clientHeight;
 const bw=no.offsetWidth;
 const bh=no.offsetHeight;
 
-no.style.left=Math.random()*(aw-bw)+"px";
-no.style.top=Math.random()*(ah-bh)+"px";
+const yr=yes.offsetTop + yes.offsetHeight + 20;
+
+let x,y;
+
+// keep distance from YES
+do{
+x=Math.random()*(aw-bw);
+y=Math.random()*(ah-bh);
+}
+while(y < 60);  // stay away from YES zone
+
+no.style.left=x+"px";
+no.style.top=y+"px";
 
 if(round<questions.length-1){
 round++;
 document.getElementById("question").innerText=questions[round];
 }
 }
+
 
 function yesClicked(){
 document.body.innerHTML=
