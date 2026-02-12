@@ -14,16 +14,15 @@ justify-content:center;
 align-items:center;
 overflow:hidden;
 
-/* Sunset background + dark overlay for text readability */
+/* sunset background + dark overlay */
 background:
-linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
 url("sunset.jpeg");
 
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 }
-
 
 .wrapper{
 text-align:center;
@@ -107,6 +106,8 @@ to{transform:translateY(100vh) rotate(720deg);}
 
 </div>
 
+<audio id="loveSong" src="song.mp3"></audio>
+
 <script>
 
 let round=0;
@@ -119,7 +120,7 @@ const questions=[
 "So tell me... will you be my Valentine forever? ❤️"
 ];
 
-// initial NO position (centered)
+// initial NO position (center)
 window.onload=function(){
 const area=document.getElementById("area");
 const no=document.getElementById("noBtn");
@@ -159,6 +160,10 @@ document.getElementById("question").innerText=questions[round];
 
 function yesClicked(){
 
+const song=document.getElementById("loveSong");
+song.volume=0.6;
+song.play();
+
 launchConfetti();
 
 setTimeout(()=>{
@@ -167,6 +172,7 @@ document.body.innerHTML=
 "<h1>Yesss 😍</h1>" +
 "<h2>You just made me the happiest husband alive ❤️</h2>" +
 "<p>I choose you. Always.</p>" +
+"<p>In every lifetime, I'd still find you.</p>" +
 "</div>";
 },800);
 
