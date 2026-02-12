@@ -27,14 +27,14 @@ h1{
 margin-bottom:40px;
 }
 
-/* play area ONLY for buttons */
+/* play area */
 #playArea{
 position:relative;
-height:220px;
+height:240px;
 margin-top:20px;
 }
 
-/* YES */
+/* YES fixed */
 #yesBtn{
 background:#ff2d55;
 color:white;
@@ -46,7 +46,7 @@ cursor:pointer;
 box-shadow:0 4px 12px rgba(0,0,0,.3);
 }
 
-/* NO */
+/* NO floating */
 #noBtn{
 background:#555;
 color:white;
@@ -56,19 +56,20 @@ border:none;
 border-radius:30px;
 cursor:pointer;
 position:absolute;
-left:200px;
-top:0;
 }
 
-.buttons{
+/* initial layout */
+.row{
 display:flex;
 justify-content:center;
 gap:30px;
+position:relative;
 }
 
-#yesBtn:hover{
-transform:scale(1.05);
+#noStart{
+visibility:hidden;
 }
+
 </style>
 </head>
 
@@ -80,10 +81,12 @@ transform:scale(1.05);
 
 <div id="playArea">
 
-<div class="buttons">
+<div class="row">
 <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
-<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+<span id="noStart"></span>
 </div>
+
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
 
 </div>
 
@@ -91,9 +94,9 @@ transform:scale(1.05);
 
 <script>
 
-let round = 0;
+let round=0;
 
-const questions = [
+const questions=[
 "Will you be my Valentine?",
 "After everything we've built together",
 "After every challenge we faced side by side",
@@ -104,32 +107,52 @@ const questions = [
 "So tell me will you be my Valentine forever?"
 ];
 
+// place NO beside YES initially
+window.onload=function(){
+const yes=document.getElementById("yesBtn");
+const no=document.getElementById("noBtn");
+const rect=yes.getBoundingClientRect();
+const area=document.getElementById("playArea").getBoundingClientRect();
+
+no.style.left=(rect.right-area.left+30)+"px";
+no.style.top=(rect.top-area.top)+"px";
+};
+
 function moveNo(){
 
-const btn = document.getElementById("noBtn");
-const area = document.getElementById("playArea");
+const btn=document.getElementById("noBtn");
+const area=document.getElementById("playArea");
 
-const areaWidth = area.clientWidth;
-const areaHeight = area.clientHeight;
+const aw=area.clientWidth;
+const ah=area.clientHeight;
 
-const btnWidth = btn.offsetWidth;
-const btnHeight = btn.offsetHeight;
+const bw=btn.offsetWidth;
+const bh=btn.offsetHeight;
 
-// random position INSIDE playArea
-const x = Math.random() * (areaWidth - btnWidth);
-const y = Math.random() * (areaHeight - btnHeight);
+let x,y;
 
-btn.style.left = x + "px";
-btn.style.top = y + "px";
+// keep distance from YES
+const yes=document.getElementById("yesBtn");
+const yr=yes.offsetLeft;
+const yt=yes.offsetTop;
 
-if(round < questions.length - 1){
+do{
+x=Math.random()*(aw-bw);
+y=Math.random()*(ah-bh);
+}
+while(Math.abs(x-yr)<120 && Math.abs(y-yt)<60);
+
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+
+if(round<questions.length-1){
 round++;
-document.getElementById("question").innerText = questions[round];
+document.getElementById("question").innerText=questions[round];
 }
 }
 
 function yesClicked(){
-document.body.innerHTML =
+document.body.innerHTML=
 "<div style='text-align:center;color:white'>" +
 "<h1>Yesss 😍</h1>" +
 "<h2>You just made me the luckiest husband alive ❤️</h2>" +
