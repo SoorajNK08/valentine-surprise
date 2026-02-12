@@ -25,8 +25,10 @@ width:100%;
 h1{margin-bottom:40px;}
 
 #box{
+#box{
 position:relative;
-height:150px;
+height:160px;
+margin-top:20px;
 }
 
 button{
@@ -43,10 +45,11 @@ color:white;
 }
 
 #noBtn{
-background:#444;
+background:#555;
 color:white;
 position:absolute;
-left:200px;
+right:0;
+top:0;
 }
 </style>
 </head>
@@ -80,16 +83,31 @@ const questions=[
 ];
 
 function moveNo(){
-let btn=document.getElementById("noBtn");
 
-btn.style.left=Math.random()*200+"px";
-btn.style.top=Math.random()*120+"px";
+const btn = document.getElementById("noBtn");
+const box = document.getElementById("box");
 
-if(round<questions.length-1){
+// box size
+const boxWidth = box.clientWidth;
+const boxHeight = box.clientHeight;
+
+// button size
+const btnWidth = btn.offsetWidth;
+const btnHeight = btn.offsetHeight;
+
+// safe random positions inside box
+const x = Math.random() * (boxWidth - btnWidth);
+const y = Math.random() * (boxHeight - btnHeight);
+
+btn.style.left = x + "px";
+btn.style.top = y + "px";
+
+if(round < questions.length - 1){
 round++;
-document.getElementById("question").innerText=questions[round];
+document.getElementById("question").innerText = questions[round];
 }
 }
+
 
 function yesClicked(){
 document.body.innerHTML=
