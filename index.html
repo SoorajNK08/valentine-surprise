@@ -9,12 +9,21 @@ body{
 margin:0;
 height:100vh;
 font-family:Arial;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
 display:flex;
 justify-content:center;
 align-items:center;
 overflow:hidden;
+
+/* Sunset background + dark overlay for text readability */
+background:
+linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+url("sunset.jpeg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 }
+
 
 .wrapper{
 text-align:center;
