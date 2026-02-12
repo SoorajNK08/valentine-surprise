@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+font-family:Arial;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.wrapper{
+text-align:center;
+color:white;
+max-width:400px;
+width:100%;
+}
+
+h1{margin-bottom:40px;}
+
+#box{
+position:relative;
+height:150px;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+}
+
+#yesBtn{
+background:#ff2d55;
+color:white;
+}
+
+#noBtn{
+background:#444;
+color:white;
+position:absolute;
+left:200px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1 id="question">Will you be my Valentine? ❤️</h1>
+
+<div id="box">
+<button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+</div>
+
+</div>
+
+<script>
+
+let round=0;
+
+const questions=[
+"Will you be my Valentine?",
+"After everything we've built together",
+"After every challenge we faced side by side",
+"After every small and big memory",
+"After choosing each other every day",
+"And still trying to press NO?",
+"I would still choose you every time",
+"So tell me will you be my Valentine forever?"
+];
+
+function moveNo(){
+let btn=document.getElementById("noBtn");
+
+btn.style.left=Math.random()*200+"px";
+btn.style.top=Math.random()*120+"px";
+
+if(round<questions.length-1){
+round++;
+document.getElementById("question").innerText=questions[round];
+}
+}
+
+function yesClicked(){
+document.body.innerHTML=
+"<div style='color:white;text-align:center'>" +
+"<h1>Yesss ❤️</h1>" +
+"<h2>You made me the happiest husband alive</h2>" +
+"<p>I choose you. Always.</p>" +
+"</div>";
+}
+
+</script>
+
+</body>
+</html>
