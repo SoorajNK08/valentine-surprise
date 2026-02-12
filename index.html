@@ -25,10 +25,13 @@ width:100%;
 h1{margin-bottom:40px;}
 
 #box{
-#box{
 position:relative;
-height:160px;
-margin-top:20px;
+height:200px;
+margin-top:30px;
+}
+
+#yesWrap{
+text-align:center;
 }
 
 button{
@@ -45,11 +48,13 @@ color:white;
 }
 
 #noBtn{
+position:absolute;
+top:80px;   /* always BELOW Yes */
+left:0;
 background:#555;
 color:white;
-position:absolute;
-right:0;
-top:0;
+border-radius:30px;
+padding:15px 35px;
 }
 </style>
 </head>
@@ -60,9 +65,12 @@ top:0;
 
 <h1 id="question">Will you be my Valentine? ❤️</h1>
 
-<div id="box">
-<button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
-<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+<<div id="box">
+  <div id="yesWrap">
+    <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+  </div>
+
+  <button id="noBtn" onmouseover="moveNo()">No 😢</button>
 </div>
 
 </div>
@@ -87,25 +95,21 @@ function moveNo(){
 const btn = document.getElementById("noBtn");
 const box = document.getElementById("box");
 
-// box size
 const boxWidth = box.clientWidth;
-const boxHeight = box.clientHeight;
-
-// button size
 const btnWidth = btn.offsetWidth;
-const btnHeight = btn.offsetHeight;
 
-// safe random positions inside box
+// NO moves horizontally only, below YES
 const x = Math.random() * (boxWidth - btnWidth);
-const y = Math.random() * (boxHeight - btnHeight);
 
 btn.style.left = x + "px";
-btn.style.top = y + "px";
+btn.style.top = "80px";
 
 if(round < questions.length - 1){
-round++;
-document.getElementById("question").innerText = questions[round];
+  round++;
+  document.getElementById("question").innerText = questions[round];
 }
+}
+
 }
 
 
